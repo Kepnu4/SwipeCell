@@ -167,14 +167,16 @@ extension SwipeCellModifier {
                         if -width + rightSlotWidth > rightdestructiveWidth {
                             let tmp = -(-width + rightSlotWidth - rightdestructiveWidth) / 5
                             withAnimation(.easeInOut) {
-                                offset = -rightdestructiveWidth + tmp
+                                setOffset(newOffset: -rightdestructiveWidth + tmp)
+//                                offset = -rightdestructiveWidth + tmp
                                 lastButtonOffset(position: .left, slot: leftSlot)
                                 lastButtonOffset(position: .right, slot: rightSlot)
                             }
                         }
                         else {
                             withAnimation(.easeInOut) {
-                                offset = -rightSlotWidth + width
+                                setOffset(newOffset: -rightSlotWidth + width)
+//                                offset = -rightSlotWidth + width
                                 lastButtonOffset(position: .left, slot: leftSlot)
                                 lastButtonOffset(position: .right, slot: rightSlot)
                             }
@@ -183,7 +185,8 @@ extension SwipeCellModifier {
                     }
                     else {
                         withAnimation(.easeInOut) {
-                            offset = -rightSlotWidth + width
+                            setOffset(newOffset: -rightSlotWidth + width)
+//                            offset = -rightSlotWidth + width
                             lastButtonOffset(position: .left, slot: leftSlot)
                             lastButtonOffset(position: .right, slot: rightSlot)
                         }
@@ -193,14 +196,16 @@ extension SwipeCellModifier {
                 else {
                     if width > 0 {
                         withAnimation(.easeInOut) {
-                            offset = -rightSlotWidth + width
+                            setOffset(newOffset: -rightSlotWidth + width)
+//                            offset = -rightSlotWidth + width
                             lastButtonOffset(position: .left, slot: leftSlot)
                             lastButtonOffset(position: .right, slot: rightSlot)
                         }
                     }
                     else {
                         withAnimation(.easeInOut) {
-                            offset = -rightSlotWidth + width / 10
+                            setOffset(newOffset: -rightSlotWidth + width / 10)
+//                            offset = -rightSlotWidth + width / 10
                             lastButtonOffset(position: .left, slot: leftSlot)
                             lastButtonOffset(position: .right, slot: rightSlot)
                         }
@@ -379,5 +384,10 @@ extension SwipeCellModifier {
 
             }
         }
+    }
+    
+    func setOffset(newOffset: CGFloat) {
+        let maxVal = self.cellPosition == .right || self.cellPosition == .none ? 0.0 : CGFloat.infinity
+        self.offset = min(newOffset, maxVal)
     }
 }
