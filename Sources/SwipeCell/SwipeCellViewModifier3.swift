@@ -265,8 +265,11 @@ extension SwipeCellModifier {
                     if (cellPosition == .left || cellPosition == .both)
                         && width > leftdestructiveWidth
                     {
-                        resetStatus()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withAnimation(.easeIn(duration: 0.3)) {
+                            offset = 400
+                        }
+//                        resetStatus()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             leftSlot?.slots.last?.action()
                         }
                         return
@@ -325,8 +328,11 @@ extension SwipeCellModifier {
 
                 if leftSlot?.slotStyle == .destructive {
                     if feedStatus == .feedOnce {
-                        resetStatus()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withAnimation(.easeIn(duration: 0.3)) {
+                            offset = 400
+                        }
+//                        resetStatus()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             leftSlot?.slots.last?.action()
                         }
                         return
