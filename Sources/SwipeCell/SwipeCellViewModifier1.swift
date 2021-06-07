@@ -32,15 +32,13 @@ struct SwipeCellModifier: ViewModifier {
     @State var resetNotice = NotificationCenter.default.publisher(for: .swipeCellReset)
 
     @State var feedStatus: FeedStatus = .none
-
+    
     var leftSlotWidth: CGFloat {
-        guard let ls = leftSlot else { return 0 }
-        return CGFloat(ls.slots.count) * ls.buttonWidth
+        return (leftSlot != nil) ? leftSlot!.width : 0
     }
-
+    
     var rightSlotWidth: CGFloat {
-        guard let rs = rightSlot else { return 0 }
-        return CGFloat(rs.slots.count) * rs.buttonWidth
+        return (rightSlot != nil) ? rightSlot!.width : 0
     }
 
     var leftdestructiveWidth: CGFloat {
@@ -50,6 +48,7 @@ struct SwipeCellModifier: ViewModifier {
     var rightdestructiveWidth: CGFloat {
         max(swipeCellStyle.destructiveWidth, rightSlotWidth + 70)
     }
+    
     @Environment(\.editMode) var editMode
 
     @State var timer = Timer.publish(every: 1, on: .main, in: .common)

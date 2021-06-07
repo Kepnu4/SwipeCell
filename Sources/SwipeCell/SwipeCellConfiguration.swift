@@ -56,6 +56,7 @@ public struct SwipeCellSlot {
     public let buttonWidth: CGFloat  //按钮宽度
     public let slots: [SwipeCellButton]  //按钮数据
     public let slotStyle: SwipeCellSlotStyle  //是否包含销毁按钮,销毁按钮只能是最后一个添加
+    public let destructiveInvisible: Bool
     public let appearAnimation: Animation
     public let dismissAnimation: Animation
     public let showAction: (() -> Void)?
@@ -64,11 +65,13 @@ public struct SwipeCellSlot {
         slots: [SwipeCellButton],
         slotStyle: SwipeCellSlotStyle = .normal,
         buttonWidth: CGFloat = 74,
+        destructiveInvisible: Bool = true,
         appearAnimation: Animation = .easeOut(duration: 0.5),
         dismissAnimation: Animation = .interactiveSpring(),
         showAction: (() -> Void)? = nil
     ) {
         self.buttonWidth = buttonWidth
+        self.destructiveInvisible = destructiveInvisible
         self.slots = slots
         self.slotStyle = slotStyle
         self.appearAnimation = appearAnimation
@@ -76,6 +79,12 @@ public struct SwipeCellSlot {
         self.showAction = showAction
     }
 
+    var width: CGFloat {
+        if slotStyle == .destructive && destructiveInvisible {
+            return CGFloat(slots.count - 1) * buttonWidth
+        }
+        return CGFloat(slots.count) * buttonWidth
+    }
 }
 
 public struct SwipeCellStyle {
