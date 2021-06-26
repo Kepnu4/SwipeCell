@@ -70,6 +70,10 @@ extension SwipeCellModifier {
                 break
             }
         }
+        .onChange(of: offset) {value in
+            leftSlot?.offsetAction?(cellID, Float(offset))
+            rightSlot?.offsetAction?(cellID, Float(offset))
+        }
         .onReceive(resetNotice) { notice in
             //            if status == .showCell {return}
             //如果其他的cell发送通知或者list发送通知,则本cell复位

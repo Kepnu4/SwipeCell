@@ -26,7 +26,7 @@ struct SwipeCellModifier: ViewModifier {
     @State var rightOffset: CGFloat = 10000
     @State var spaceWidth: CGFloat = 0
 
-    let cellID = UUID()
+    let cellID: UUID
 
     @State var currentCellID: UUID? = nil
     @State var resetNotice = NotificationCenter.default.publisher(for: .swipeCellReset)
@@ -59,13 +59,15 @@ struct SwipeCellModifier: ViewModifier {
         leftSlot: SwipeCellSlot?,
         rightSlot: SwipeCellSlot?,
         swipeCellStyle: SwipeCellStyle,
-        clip: Bool
+        clip: Bool,
+        cellID: UUID = UUID()
     ) {
         _cellPosition = State(wrappedValue: cellPosition)
         self.clip = clip
         self.leftSlot = leftSlot
         self.rightSlot = rightSlot
         self.swipeCellStyle = swipeCellStyle
+        self.cellID = cellID
     }
 
     func buttonView(_ slot: SwipeCellSlot, _ i: Int) -> some View {

@@ -11,7 +11,8 @@ extension View {
         rightSlot: SwipeCellSlot?,
         swipeCellStyle: SwipeCellStyle = .defaultStyle(),
         clip: Bool = true,
-        disable: Bool = false
+        disable: Bool = false,
+        cellID: UUID = UUID()
     ) -> some View {
         var d = disable
         if cellPosition == .none {
@@ -30,7 +31,8 @@ extension View {
                             leftSlot: leftSlot,
                             rightSlot: rightSlot,
                             swipeCellStyle: swipeCellStyle,
-                            clip: clip
+                            clip: clip,
+                            cellID: cellID
                         )
                     )
 

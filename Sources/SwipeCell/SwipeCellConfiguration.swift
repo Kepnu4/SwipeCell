@@ -60,6 +60,7 @@ public struct SwipeCellSlot {
     public let appearAnimation: Animation
     public let dismissAnimation: Animation
     public let showAction: (() -> Void)?
+    public let offsetAction: ((UUID, Float) -> Void)?
 
     public init(
         slots: [SwipeCellButton],
@@ -68,7 +69,8 @@ public struct SwipeCellSlot {
         destructiveInvisible: Bool = true,
         appearAnimation: Animation = .easeOut(duration: 0.5),
         dismissAnimation: Animation = .interactiveSpring(),
-        showAction: (() -> Void)? = nil
+        showAction: (() -> Void)? = nil,
+        offsetAction: ((UUID, Float) -> Void)? = nil
     ) {
         self.buttonWidth = buttonWidth
         self.destructiveInvisible = destructiveInvisible
@@ -77,6 +79,7 @@ public struct SwipeCellSlot {
         self.appearAnimation = appearAnimation
         self.dismissAnimation = dismissAnimation
         self.showAction = showAction
+        self.offsetAction = offsetAction
     }
 
     var width: CGFloat {
